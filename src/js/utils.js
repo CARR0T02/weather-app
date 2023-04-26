@@ -1,4 +1,7 @@
-export function convertToDay(number) {
+import { getDay, format } from 'date-fns';
+
+export function convertToDay(date) {
+  let number = getDay(new Date(date));
   switch (number) {
     case 0:
       return 'Sunday';
@@ -15,5 +18,9 @@ export function convertToDay(number) {
     case 6:
       return 'Saturday';
   }
-  throw new Error('Day index is out of range (0-6)');
+}
+
+export function convertDate(date) {
+  let formattedDate = format(new Date(date), "eeee',' d MMM ''yy");
+  return formattedDate;
 }
