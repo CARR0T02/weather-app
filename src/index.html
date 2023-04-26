@@ -4,7 +4,80 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= htmlWebpackPlugin.options.title %><</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body></body>
+  <body>
+    <div class="wrapper">
+      <div class="main">
+        <div id="today-main">
+          <div id="weather container">
+            <div data-today="weather-text"></div>
+            <img data-today="weather-icon" />
+          </div>
+          <div data-today="date"></div>
+          <div id="temperature-container">
+            <div data-today="current-temp"></div>
+            <div data-today="max-temp"></div>
+            <div data-today="min-temp"></div>
+          </div>
+        </div>
+        <div data-today="alerts"></div>
+        <div id="today-additional">
+          <div data-today="heat-index"></div>
+          <div data-today="humidity"></div>
+          <div id="moon-phase-container">
+            <div data-today="moon-phase"></div>
+          </div>
+          <div data-today="precipitation"></div>
+          <div data-today="rain-chance"></div>
+          <div data-today="sunrise"></div>
+          <div data-today="sunset"></div>
+        </div>
+      </div>
+      <div class="forecast-container">
+        <div class="daily-forecast" data-forecast-day="1">
+          <div class="forecast-day"></div>
+          <img src="" alt="" class="forecast-weather" />
+          <div class="forecast-max-temp"></div>
+          <div class="forecast-min-temp"></div>
+        </div>
+        <div class="daily-forecast" data-forecast-day="2">
+          <div class="forecast-day"></div>
+          <img src="" alt="" class="forecast-weather" />
+          <div class="forecast-max-temp"></div>
+          <div class="forecast-min-temp"></div>
+        </div>
+        <div class="daily-forecast" data-forecast-day="3">
+          <div class="forecast-day"></div>
+          <img src="" alt="" class="forecast-weather" />
+          <div class="forecast-max-temp"></div>
+          <div class="forecast-min-temp"></div>
+        </div>
+        <div class="daily-forecast" data-forecast-day="4">
+          <div class="forecast-day"></div>
+          <img src="" alt="" class="forecast-weather" />
+          <div class="forecast-max-temp"></div>
+          <div class="forecast-min-temp"></div>
+        </div>
+        <div class="daily-forecast" data-forecast-day="5">
+          <div class="forecast-day"></div>
+          <img src="" alt="" class="forecast-weather" />
+          <div class="forecast-max-temp"></div>
+          <div class="forecast-min-temp"></div>
+        </div>
+        <div class="daily-forecast" data-forecast-day="6">
+          <div class="forecast-day"></div>
+          <img src="" alt="" class="forecast-weather" />
+          <div class="forecast-max-temp"></div>
+          <div class="forecast-min-temp"></div>
+        </div>
+        <div class="daily-forecast" data-forecast-day="7">
+          <div class="forecast-day"></div>
+          <img src="" alt="" class="forecast-weather" />
+          <div class="forecast-max-temp"></div>
+          <div class="forecast-min-temp"></div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
