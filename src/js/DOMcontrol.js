@@ -10,42 +10,43 @@ export function loadWeather(weatherToday, weatherWeek, weatherForecastHourly) {
 }
 
 function updateWeatherMain(weatherToday, temperatureUnit) {
-  const main = document.querySelector('#today-main');
-  const additional = document.querySelector('#today-additional');
-  main.querySelector('[data-today = "weather-text"]').textContent =
+  document.querySelector('[data-today = "country"').textContent =
+    weatherToday.country;
+  document.querySelector('[data-today = "weather-text"]').textContent =
     weatherToday.condition.text;
-  main.querySelector('[data-today = "weather-icon"]').src =
+  document.querySelector('[data-today = "weather-icon"]').src =
     weatherToday.condition.icon;
-  main.querySelector('[data-today = "date"]').textContent = weatherToday.time;
-  main.querySelector('[data-today = "current-temp"]').textContent =
+  document.querySelector('[data-today = "date"]').textContent =
+    weatherToday.time;
+  document.querySelector('[data-today = "current-temp"]').textContent =
     weatherToday.temperature + temperatureUnit;
-  main.querySelector('[data-today = "max-temp"]').textContent =
+  document.querySelector('[data-today = "max-temp"]').textContent =
     weatherToday.maxTemperature + temperatureUnit;
-  main.querySelector('[data-today = "min-temp"]').textContent =
+  document.querySelector('[data-today = "min-temp"]').textContent =
     weatherToday.minTemperature + temperatureUnit;
-  additional.querySelector('[data-today = "heat-index"]').textContent =
+  document.querySelector('[data-today = "heat-index"]').textContent =
     weatherToday.heatIndex + temperatureUnit;
-  additional.querySelector(
+  document.querySelector(
     '[data-today = "humidity"]'
   ).textContent = `${weatherToday.humidity}%`;
-  additional.querySelector(
+  document.querySelector(
     '[data-today = "precipitation"]'
   ).textContent = `${weatherToday.precip}mm`;
-  additional.querySelector(
+  document.querySelector(
     '[data-today = "rain-chance"]'
   ).textContent = `${weatherToday.rainChance}%`;
-  additional.querySelector('[data-today = "sunrise"]').textContent =
+  document.querySelector('[data-today = "sunrise"]').textContent =
     weatherToday.sunrise;
-  additional.querySelector('[data-today = "sunset"]').textContent =
+  document.querySelector('[data-today = "sunset"]').textContent =
     weatherToday.sunset;
   updateMoonPhase(
     weatherToday.moon_phase,
-    additional.querySelector('#moon-phase-container')
+    document.querySelector('#moon-phase-container')
   );
   if (!weatherToday.alerts) {
     updateAlerts(
       weatherToday.alerts,
-      main.querySelector('[data-today = "alerts"]')
+      document.querySelector('[data-today = "alerts"]')
     );
   }
 }
@@ -58,7 +59,7 @@ function updateForecastDaily(weatherForecastDaily, index, temperatureUnit) {
   const maxTemp = container.querySelector('.forecast-max-temp');
   maxTemp.textContent = weatherForecastDaily.maxTemperature + temperatureUnit;
   const minTemp = container.querySelector('.forecast-min-temp');
-  minTemp.textContent = weatherForecastDaily.minTemperature;
+  minTemp.textContent = weatherForecastDaily.minTemperature + temperatureUnit;
   const weatherImg = container.querySelector('.forecast-weather');
   weatherImg.src = weatherForecastDaily.condition.icon;
   weatherImg.alt = weatherForecastDaily.condition.text;
