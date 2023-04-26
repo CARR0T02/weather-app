@@ -1,5 +1,4 @@
-import { getDay } from 'date-fns';
-import { convertToDay } from './utils.js';
+import { convertToDay, convertDate } from './utils.js';
 
 async function fetchJSON(URL) {
   try {
@@ -49,13 +48,14 @@ export function getToday(weatherData, temperatureUnit) {
     sunrise,
     sunset,
     moon_phase,
-    alerts;
-  if (temperatureUnit === 'c') {
+    alerts,
+    country;
+  if (temperatureUnit === '°C') {
     heatIndex = weatherData.current.feelslike_c;
     temperature = weatherData.current.temp_c;
     maxTemperature = weatherData.forecast.forecastday[0].day.maxtemp_c;
     minTemperature = weatherData.forecast.forecastday[0].day.mintemp_c;
-  } else if (temperatureUnit === 'f') {
+  } else if (temperatureUnit === '°F') {
     heatIndex = weatherData.current.feelslike_f;
     temperature = weatherData.current.temp_f;
     maxTemperature = weatherData.forecast.forecastday[0].day.maxtemp_f;
@@ -65,13 +65,14 @@ export function getToday(weatherData, temperatureUnit) {
   }
   precip = weatherData.current.precip_mm;
   humidity = weatherData.current.humidity;
-  time = weatherData.location.time;
+  time = convertDate(weatherData.location.localtime);
   condition = weatherData.current.condition;
   rainChance = weatherData.forecast.forecastday[0].day.daily_chance_of_rain;
   sunrise = weatherData.forecast.forecastday[0].astro.sunrise;
   sunset = weatherData.forecast.forecastday[0].astro.sunset;
   moon_phase = weatherData.forecast.forecastday[0].astro.moon_phase;
   alerts = weatherData.alerts;
+  country = weatherData.location.country;
   return {
     temperature,
     maxTemperature,
@@ -86,6 +87,7 @@ export function getToday(weatherData, temperatureUnit) {
     sunset,
     moon_phase,
     alerts,
+    country,
   };
 }
 
@@ -94,10 +96,10 @@ export function getWeekly(weatherData, temperatureUnit) {
   weatherData.forecast.forecastday.shift();
   let date, dayOfWeek, maxTemperature, minTemperature, condition;
   let forecastDailyArr = [];
-  if (temperatureUnit === 'c') {
+  if (temperatureUnit === '°C') {
     for (const day of weatherData.forecast.forecastday) {
       date = day.date;
-      dayOfWeek = convertToDay(getDay(new Date(date)));
+      dayOfWeek = convertToDay(date);
       maxTemperature = day.day.maxtemp_c;
       minTemperature = day.day.mintemp_c;
       condition = day.day.condition;
@@ -110,10 +112,10 @@ export function getWeekly(weatherData, temperatureUnit) {
       };
       forecastDailyArr.push(forecastDay);
     }
-  } else if (temperatureUnit === 'f') {
+  } else if (temperatureUnit === '°F') {
     for (const day of weatherData.forecast.forecastday) {
       date = day.date;
-      dayOfWeek = convertToDay(getDay(new Date(date)));
+      dayOfWeek = convertToDay(date);
       maxTemperature = day.day.maxtemp_f;
       minTemperature = day.day.mintemp_f;
       condition = day.day.condition;
