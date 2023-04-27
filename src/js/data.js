@@ -1,5 +1,8 @@
 import { convertToDay, convertDate } from './utils.js';
 
+const keyWeather_API = 'a76384fc6b0e40dc9eb230847232404';
+const keyIP_API = '747c7134266a415caf9ab17c6830e94a';
+
 async function fetchJSON(URL) {
   try {
     const response = await fetch(URL, { mode: 'cors' });
@@ -13,7 +16,7 @@ async function fetchJSON(URL) {
 // Fetches weather data based on search input
 export async function fetchData(input) {
   try {
-    let URL = `http://api.weatherapi.com/v1/forecast.json?key=a76384fc6b0e40dc9eb230847232404&q=${input}&days=8&alerts=yes`;
+    let URL = `http://api.weatherapi.com/v1/forecast.json?key=${keyWeather_API}&q=${input}&days=8&alerts=yes`;
     const weatherData = await fetchJSON(URL);
     return weatherData;
   } catch (err) {
@@ -24,8 +27,7 @@ export async function fetchData(input) {
 // Fetches weather data based on current location
 export async function fetchCurrentData() {
   try {
-    let URL =
-      'https://ipgeolocation.abstractapi.com/v1/?api_key=747c7134266a415caf9ab17c6830e94a';
+    let URL = `https://ipgeolocation.abstractapi.com/v1/?api_key=${keyIP_API}`;
     const IPData = await fetchJSON(URL);
     const weatherData = await fetchData(IPData.ip_address);
     return weatherData;
