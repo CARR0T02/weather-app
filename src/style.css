@@ -233,6 +233,7 @@ p.description {
   .daily-forecast {
     flex-direction: column;
     justify-content: center;
+    width: 180px;
     gap: var(--fs-400);
   }
 

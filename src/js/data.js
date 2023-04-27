@@ -5,7 +5,7 @@ const keyIP_API = '747c7134266a415caf9ab17c6830e94a';
 
 async function fetchJSON(URL) {
   try {
-    const response = await fetch(URL, { mode: 'cors' });
+    const response = await fetch(URL);
     const data = await response.json();
     return data;
   } catch (err) {
@@ -16,8 +16,8 @@ async function fetchJSON(URL) {
 // Fetches weather data based on search input
 export async function fetchData(input) {
   try {
-    let URL = `http://api.weatherapi.com/v1/forecast.json?key=${keyWeather_API}&q=${input}&days=8&alerts=yes`;
-    const weatherData = await fetchJSON(URL);
+    let URL = `https://api.weatherapi.com/v1/forecast.json?key=${keyWeather_API}&q=${input}&days=8&alerts=yes`;
+    const weatherData = await fetchJSON(URL, { mode: 'cors' });
     return weatherData;
   } catch (err) {
     console.log(err);

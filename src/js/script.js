@@ -6,11 +6,9 @@ import { loadWeather } from './DOMcontrol.js';
 export async function getWeather(input = null) {
   let weatherData;
   if (input === null) {
-    console.log('Using IP');
     weatherData = await fetchCurrentData();
   } else {
     weatherData = await fetchData(input);
-    console.log(`Searching for ${input}`);
   }
   const weatherToday = getToday(weatherData, '°C');
   const weatherWeek = getWeekly(weatherData, '°C');
