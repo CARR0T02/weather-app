@@ -49,7 +49,7 @@ export function getToday(weatherData, temperatureUnit) {
     sunset,
     moon_phase,
     alerts,
-    country;
+    city;
   if (temperatureUnit === '°C') {
     heatIndex = weatherData.current.feelslike_c;
     temperature = weatherData.current.temp_c;
@@ -72,7 +72,7 @@ export function getToday(weatherData, temperatureUnit) {
   sunset = weatherData.forecast.forecastday[0].astro.sunset;
   moon_phase = weatherData.forecast.forecastday[0].astro.moon_phase;
   alerts = weatherData.alerts;
-  country = weatherData.location.country;
+  city = weatherData.location.name;
   return {
     temperature,
     maxTemperature,
@@ -87,7 +87,7 @@ export function getToday(weatherData, temperatureUnit) {
     sunset,
     moon_phase,
     alerts,
-    country,
+    city,
   };
 }
 
@@ -95,7 +95,7 @@ export function getToday(weatherData, temperatureUnit) {
 export function getWeekly(weatherData, temperatureUnit) {
   let date, dayOfWeek, maxTemperature, minTemperature, condition;
   let forecastDailyArr = [];
-  for (let i = 0; i < 7; i++) {
+  for (let i = 1; i < 8; i++) {
     const day = weatherData.forecast.forecastday[i];
     date = day.date;
     dayOfWeek = convertToDay(date);
