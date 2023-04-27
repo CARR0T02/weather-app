@@ -22,6 +22,7 @@ export function convertToDay(date) {
 }
 
 export function convertDate(date) {
+  console.log(date);
   let formattedDate = format(new Date(date), "eeee',' d MMM ''yy");
   return formattedDate;
 }
