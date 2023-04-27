@@ -93,7 +93,9 @@ export function getToday(weatherData, temperatureUnit) {
 
 // Get necessary forecasted data for the week
 export function getWeekly(weatherData, temperatureUnit) {
-  weatherData.forecast.forecastday.shift();
+  if (weatherData.forecast.forecastday.length === 8) {
+    weatherData.forecast.forecastday.shift();
+  }
   let date, dayOfWeek, maxTemperature, minTemperature, condition;
   let forecastDailyArr = [];
   if (temperatureUnit === '°C') {
