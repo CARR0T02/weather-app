@@ -24,3 +24,10 @@ export function convertDate(date) {
   let formattedDate = format(new Date(date), "eeee',' d MMM ''yy");
   return formattedDate;
 }
+
+export function handleSearch() {
+  const search = document.querySelector('#search');
+  let location = search.value;
+  getWeather(location);
+  search.value = '';
+}
