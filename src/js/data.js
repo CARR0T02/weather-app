@@ -93,47 +93,30 @@ export function getToday(weatherData, temperatureUnit) {
 
 // Get necessary forecasted data for the week
 export function getWeekly(weatherData, temperatureUnit) {
-  if (weatherData.forecast.forecastday.length === 8) {
-    weatherData.forecast.forecastday.shift();
-  }
   let date, dayOfWeek, maxTemperature, minTemperature, condition;
   let forecastDailyArr = [];
-  if (temperatureUnit === '°C') {
-    for (let i = 0; i < 7; i++) {
-      const day = weatherData.forecast.forecastday[i];
-      console.log(day);
-      date = day.date;
-      dayOfWeek = convertToDay(date);
+  for (let i = 0; i < 7; i++) {
+    const day = weatherData.forecast.forecastday[i];
+    date = day.date;
+    dayOfWeek = convertToDay(date);
+    condition = day.day.condition;
+    if (temperatureUnit === '°C') {
       maxTemperature = day.day.maxtemp_c;
       minTemperature = day.day.mintemp_c;
-      condition = day.day.condition;
-      let forecastDay = {
-        date,
-        dayOfWeek,
-        maxTemperature,
-        minTemperature,
-        condition,
-      };
-      forecastDailyArr.push(forecastDay);
-    }
-  } else if (temperatureUnit === '°F') {
-    for (const day of weatherData.forecast.forecastday) {
-      date = day.date;
-      dayOfWeek = convertToDay(date);
+    } else if (temperatureUnit === '°F') {
       maxTemperature = day.day.maxtemp_f;
       minTemperature = day.day.mintemp_f;
-      condition = day.day.condition;
-      let forecastDay = {
-        date,
-        dayOfWeek,
-        maxTemperature,
-        minTemperature,
-        condition,
-      };
-      forecastDailyArr.push(forecastDay);
+    } else {
+      throw new Error('Invalid temperature unit');
     }
-  } else {
-    throw new Error('Invalid Temperature unit');
+    let forecastDay = {
+      date,
+      dayOfWeek,
+      maxTemperature,
+      minTemperature,
+      condition,
+    };
+    forecastDailyArr.push(forecastDay);
   }
   return forecastDailyArr;
 }
