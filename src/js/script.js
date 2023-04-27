@@ -13,9 +13,6 @@ export async function getWeather(input = null) {
   const weatherToday = getToday(weatherData, '°C');
   const weatherWeek = getWeekly(weatherData, '°C');
   loadWeather(weatherToday, weatherWeek, null);
-  console.log(weatherData);
-  console.log(weatherToday);
-  console.table(weatherWeek);
 }
 
 function initialise() {
