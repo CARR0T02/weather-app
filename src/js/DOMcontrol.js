@@ -1,18 +1,4 @@
-import { handleSearch } from './utils.js';
-
-export function initialise() {
-  window.addEventListener('load', () => {
-    document.querySelector('body').style.visibility = 'visible';
-  });
-  const search = document.querySelector('#search');
-  search.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  });
-  const searchBtn = document.querySelector('#search-icon');
-  searchBtn.addEventListener('click', handleSearch);
-}
+import { getMoonPhaseSVG } from './utils.js';
 
 export function loadWeather(weatherToday, weatherWeek, weatherForecastHourly) {
   let index = 1;
@@ -24,8 +10,8 @@ export function loadWeather(weatherToday, weatherWeek, weatherForecastHourly) {
 }
 
 function updateWeatherMain(weatherToday, temperatureUnit) {
-  document.querySelector('[data-today = "country"').textContent =
-    weatherToday.country;
+  document.querySelector('[data-today = "city"').textContent =
+    weatherToday.city;
   document.querySelector('[data-today = "weather-text"]').textContent =
     weatherToday.condition.text;
   document.querySelector('[data-today = "weather-icon"]').src =
@@ -93,8 +79,9 @@ function updateAlerts(alerts, containerAlerts) {
   }
 }
 
-// UPDATE TO PUT IN MOONPHASE SVG
 function updateMoonPhase(phase, containerMoonPhase) {
   containerMoonPhase.querySelector('[data-today = "moon-phase"]').textContent =
     phase;
+  const moonSVG = containerMoonPhase.querySelector('#moon-phase-icon');
+  getMoonPhaseSVG(phase, moonSVG);
 }
