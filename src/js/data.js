@@ -99,7 +99,9 @@ export function getWeekly(weatherData, temperatureUnit) {
   let date, dayOfWeek, maxTemperature, minTemperature, condition;
   let forecastDailyArr = [];
   if (temperatureUnit === '°C') {
-    for (const day of weatherData.forecast.forecastday) {
+    for (let i = 0; i < 7; i++) {
+      const day = weatherData.forecast.forecastday[i];
+      console.log(day);
       date = day.date;
       dayOfWeek = convertToDay(date);
       maxTemperature = day.day.maxtemp_c;
