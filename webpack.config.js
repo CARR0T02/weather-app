@@ -1,8 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/js/script.js',
   devtool: 'inline-source-map',
   devServer: {
@@ -14,6 +17,9 @@ module.exports = {
       title: 'Weather App',
       template: './src/index.html',
     }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
   ],
   output: {
     filename: '[name].bundle.js',
@@ -24,7 +30,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -34,5 +40,6 @@ module.exports = {
   },
   optimization: {
     runtimeChunk: 'single',
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
   },
 };
