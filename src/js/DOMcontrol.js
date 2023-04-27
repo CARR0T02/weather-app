@@ -1,4 +1,18 @@
-import { max } from 'date-fns';
+import { handleSearch } from './utils.js';
+
+export function initialise() {
+  window.addEventListener('load', () => {
+    document.querySelector('body').style.visibility = 'visible';
+  });
+  const search = document.querySelector('#search');
+  search.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  });
+  const searchBtn = document.querySelector('#search-icon');
+  searchBtn.addEventListener('click', handleSearch);
+}
 
 export function loadWeather(weatherToday, weatherWeek, weatherForecastHourly) {
   let index = 1;
