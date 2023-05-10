@@ -97,7 +97,7 @@ export function getToday(weatherData, temperatureUnit) {
 export function getWeekly(weatherData, temperatureUnit) {
   let date, dayOfWeek, maxTemperature, minTemperature, condition;
   let forecastDailyArr = [];
-  for (let i = 1; i < 4; i++) {
+  for (let i = 1; i < 3; i++) {
     const day = weatherData.forecast.forecastday[i];
     date = day.date;
     dayOfWeek = convertToDay(date);
