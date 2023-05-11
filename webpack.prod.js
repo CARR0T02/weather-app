@@ -1,22 +1,14 @@
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+module.exports = merge(common, {
   mode: 'production',
-  entry: './src/js/script.js',
-  devtool: 'inline-source-map',
-  devServer: {
-    static: './dist',
-    hot: false,
-  },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Weather App',
-      template: './src/index.html',
-    }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
@@ -24,7 +16,6 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
   },
   module: {
     rules: [
@@ -32,14 +23,20 @@ module.exports = {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
     ],
   },
   optimization: {
-    runtimeChunk: 'single',
-    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin(),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        minify: {
+          removeAttributeQuotes: true,
+          collapseWhitespace: true,
+          removeComments: true,
+        },
+      }),
+    ],
   },
-};
+});
